@@ -16,7 +16,8 @@ Runs next which starts app in development mode
 
 bash
 $ expo start
-//Open other terminal:
+
+Open other terminal: 
 $ json-server ./src/services/server.json --host 'network ip' --port 3333 --delay 700
 
 
