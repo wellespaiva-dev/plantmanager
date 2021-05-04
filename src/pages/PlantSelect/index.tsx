@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
-import {View, Text, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
-import { EnvorimentButton } from '../components/EnvorimentButton';
-import { Header } from '../components/Header';
-import { Load } from '../components/Load';
-import { PlantCardPrimary } from '../components/PlantCardPrimary';
-import { PlantPlops } from '../libs/storage';
-import api  from '../services/api';
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
+import {View, FlatList, ActivityIndicator} from 'react-native';
+import { EnvorimentButton } from '../../components/EnvorimentButton';
+import { Header } from '../../components/Header';
+import { Load } from '../../components/Load';
+import { PlantCardPrimary } from '../../components/PlantCardPrimary';
+import { PlantPlops } from '../../libs/storage';
+import api  from '../../services/api';
+import colors from '../../styles/colors';
+import {
+  Container,
+  HeaderContainer,
+  Title,
+  SubTitle,
+  Plants
+} from './styles'
 
 interface EnvorimentProps{
   key: string,
@@ -84,16 +90,15 @@ export function PlantSelect(){
     fetchPlants();
   }, [])
 
-  
   if(loading)
     return <Load />
   return(
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <Container>
+      <HeaderContainer>
         <Header />
-        <Text style={styles.title}>Em qual ambiente</Text>
-        <Text style={styles.subtitle}>você quer colocar sua planta?</Text>
-      </View>
+        <Title>Em qual ambiente</Title>
+        <SubTitle>você quer colocar sua planta?</SubTitle>
+      </HeaderContainer>
       <View>
         <FlatList
           data={envoriment}
@@ -107,10 +112,16 @@ export function PlantSelect(){
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.envorimentList}
+          contentContainerStyle={{
+            height: 40,
+            justifyContent: 'center',
+            paddingBottom: 5,
+            marginLeft: 32,
+            marginVertical: 32
+          }}
         />
       </View>
-      <View style={styles.plants}>
+      <Plants>
         <FlatList 
           data={filteredPlants}
           keyExtractor={(item) => String(item.id)}
@@ -132,48 +143,7 @@ export function PlantSelect(){
             : <></>
           }
         />
-
-      </View>
-    </View>
+      </Plants>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-
-  header: {
-    paddingHorizontal: 30,
-  },
-
-  title: {
-    fontSize: 17,
-    fontFamily: fonts.heading,
-    color: colors.heading,
-    lineHeight: 20,
-    marginTop: 15,
-  },
-
-  subtitle: {
-    fontSize: 17,
-    fontFamily: fonts.text,
-    color: colors.heading,
-    lineHeight: 20,
-  },
-
-  envorimentList: {
-    height: 40,
-    justifyContent: 'center',
-    paddingBottom: 5,
-    marginLeft: 32,
-    marginVertical: 32
-  },
-
-  plants: {
-    flex: 1,
-    paddingHorizontal: 32,
-    justifyContent: 'center',
-  },
-})

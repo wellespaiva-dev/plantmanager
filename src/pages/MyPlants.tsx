@@ -3,8 +3,8 @@ import {StyleSheet, View, Text, Image, FlatList, Alert} from 'react-native';
 import { Header } from '../components/Header';
 import { loadPlant, PlantPlops, removePlant } from '../libs/storage';
 import colors from '../styles/colors';
-import {formatDistance} from 'date-fns'
-import {pt} from 'date-fns/locale'
+import {formatDistance} from 'date-fns';
+import {pt} from 'date-fns/locale';
 import fonts from '../styles/fonts';
 import { PlantCardSecondary } from '../components/PlantCardSecondary';
 import { Load } from '../components/Load';
@@ -76,7 +76,7 @@ export function MyPlants(){
       </View>
       <View style={styles.plants} >
         <Text style={styles.plantsTitle}>Próximas regadas</Text>
-        <FlatList 
+        <FlatList
           data={myPlants}
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => (

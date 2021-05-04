@@ -9,7 +9,6 @@ import Routes from './src/routes';
 import * as Notifications from 'expo-notifications';
 import { PlantPlops } from './src/libs/storage';
 import * as Permissions from 'expo-permissions';
-import { Alert } from 'react-native';
 
 export default function App() {
   const [fontsLoader] = useFonts({
